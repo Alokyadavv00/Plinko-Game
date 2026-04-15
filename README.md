@@ -19,18 +19,20 @@ npm install
 
 ### Environment Variables
 
-Create a `.env` file in the root directory and add your remote Postgres connection string (e.g. from Vercel Postgres or Neon):
+The `.env` file is pre-configured:
+```
+DATABASE_URL="file:d:/Plinko Game/plinko-game/prisma/dev.db"
+```
 
-```env
-DATABASE_URL="postgresql://username:password@hostname/database?sslmode=require"
+For a different machine, update the path:
+```bash
+# Create .env with your absolute path (SQLite)
+echo 'DATABASE_URL="file:./dev.db"' > .env
 ```
 
 ### Database Setup
 
-Instantiate the Prisma client and push the schema to your remote Postgres database:
-
 ```bash
-npx prisma generate
 npx prisma db push
 ```
 
@@ -38,17 +40,21 @@ npx prisma db push
 
 ```bash
 npm run dev     # Start dev server (http://localhost:3000)
-npm test        # Run mathematical unit tests
+npm test        # Run unit tests
+npm run build   # Production build
+npm start       # Start production server
 ```
 
 ### Available Scripts
 
 | Script | Description |
 |--------|-------------|
-| `npm run dev` | Start Next.js dev server |
-| `npm run build` | Build project for production |
-| `npm start` | Start local production server |
-| `npm test` | Run vitest cryptography unit tests |
+| `npm run dev` | Start Next.js dev server with Turbopack |
+| `npm run build` | Build for production |
+| `npm start` | Start production server |
+| `npm test` | Run vitest unit tests |
+| `npm run db:push` | Push schema to SQLite |
+| `npm run db:studio` | Open Prisma Studio |
 
 ---
 
@@ -205,7 +211,7 @@ All test vectors verified with 24 passing unit tests.
 
 ## AI Usage
 
-As encouraged by the assignment guidelines, this project was built utilizing AI assistance (Google DeepMind's Antigravity Agent/Claude/GPT) as a collaborative pair-programmer. The usage was highly logical and strategic, optimizing development time for high-value tasks:
+As encouraged by the assignment guidelines, this project was built utilizing AI assistance as a collaborative pair-programmer. The usage was highly logical and strategic, optimizing development time for high-value tasks:
 
 1. **Rapid Prototyping & Boilerplate**: Used AI to quickly scaffold the Next.js foundation, basic API routes, and standard React UI layout. This saved hours of tedious setup, allowing me to heavily index my time on the complex PRNG and algorithm physics.
 2. **Algorithm Translation & Math**: The core challenge was achieving exact deterministic outcomes based on the provided test vectors. I used AI to help translate Marsaglia's theoretical xorshift32 algorithm and complex SHA-256 commit-reveal specs into strict, type-safe TypeScript.
