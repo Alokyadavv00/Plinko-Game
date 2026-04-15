@@ -1,0 +1,36 @@
+// Plinko Game — Database Schema
+// Using SQLite for simplicity (swap to Postgres by changing provider + URL)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Round {
+  id               String    @id @default(cuid())
+  createdAt        DateTime  @default(now())
+  status           String    // CREATED | STARTED | REVEALED
+
+  // Fairness
+  nonce            String
+  commitHex        String    // SHA256(serverSeed:nonce)
+  serverSeedHash   String    @default("") // internal storage for server seed (encrypted/hashed for extra safety)
+  serverSeed       String?   // revealed post-round (null until REVEALED)
+  clientSeed       String    @default("")
+  combinedSeed     String    @default("")
+  pegMapHash       String    @default("")
+
+  // Game
+  rows             Int       @default(12)
+  dropColumn       Int       @default(6)
+  binIndex         Int       @default(0)
+  payoutMultiplier Float     @default(0)
+  betCents         Int       @default(0)
+  pathJson         String    @default("[]") // JSON string of path decisions
+
+  revealedAt       DateTime?
+}
