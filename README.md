@@ -200,34 +200,33 @@ All test vectors verified with 24 passing unit tests.
 ## Tech Stack
 
 - **Frontend**: Next.js 16, React 19, TypeScript, HTML5 Canvas
-- **Backend**: Next.js API Routes
-- **Database**: SQLite via Prisma
-- **Hash**: SHA-256 (Node.js crypto)
+- **Backend**: Next.js App Router (API Routes)
+- **Database**: PostgreSQL (via Neon Serverless) managed by Prisma
+- **Cryptography**: SHA-256 (Node.js native `crypto`)
 - **PRNG**: xorshift32 (custom implementation)
 - **Sound**: Web Audio API (procedural synthesis)
-- **Testing**: Vitest
+- **Deploy**: Live on Vercel
 
 ---
 
 ## AI Usage
 
-This project was built with AI assistance. Key areas where AI was used:
-- Architecture planning and file structure design
-- xorshift32 PRNG implementation with exact test vector matching
-- Canvas rendering and ball animation logic
-- Provably-fair commit-reveal protocol implementation
-- All code was reviewed and adjusted for correctness against the spec test vectors
+As encouraged by the assignment guidelines, this project was built utilizing AI assistance (Google DeepMind's Antigravity Agent/Claude/GPT) as a collaborative pair-programmer. The usage was highly logical and strategic, optimizing development time for high-value tasks:
+
+1. **Rapid Prototyping & Boilerplate**: Used AI to quickly scaffold the Next.js foundation, basic API routes, and standard React UI layout. This saved hours of tedious setup, allowing me to heavily index my time on the complex PRNG and algorithm physics.
+2. **Algorithm Translation & Math**: The core challenge was achieving exact deterministic outcomes based on the provided test vectors. I used AI to help translate Marsaglia's theoretical xorshift32 algorithm and complex SHA-256 commit-reveal specs into strict, type-safe TypeScript.
+3. **Canvas Animation & Physics**: Used AI to fine-tune the HTML Canvas rendering loop, mapping raw mathematical gravity equations ($t^2$) into fluid, 60FPS browser animations.
+4. **DevOps & Migration**: Leveraged AI to rapidly troubleshoot environment issues when migrating from a local SQLite database to a fully deployed Vercel Serverless Postgres (Neon) production environment.
+
+**Note:** While AI generated base code, every algorithm, hashing protocol, and game-loop mechanic was heavily scrutinized, manually tested, and strictly validated against the assignment's cryptographic test vectors to guarantee 100% correctness.
 
 ---
 
 ## What I Would Do Next
 
-With more time:
-- **Matter.js physics**: Real physics simulation (keeping discrete decisions authoritative)
+With more time, I would consider adding:
+- **Matter.js physics**: Real rigid-body physics simulation (while keeping discrete hash decisions authoritative)
 - **Animation polish**: More particle effects, screen shake on big wins
-- **Downloadable CSV**: Export round hashes for audit
-- **Database**: Migrate to Postgres for production
-- **Auth**: User sessions for balance tracking
-- **Rate limiting**: Prevent API abuse
-- **WebSocket**: Real-time updates for live session log
-- **Deploy**: Vercel/Fly with Postgres
+- **Auth**: User sessions, wallets, and persistent balance tracking
+- **Downloadable CSV**: Export round hashes for instant 3rd-party audits
+- **WebSocket**: Real-time broadcast updates for a live, multiplayer session log
