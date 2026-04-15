@@ -19,20 +19,18 @@ npm install
 
 ### Environment Variables
 
-The `.env` file is pre-configured:
-```
-DATABASE_URL="file:d:/Plinko Game/plinko-game/prisma/dev.db"
-```
+Create a `.env` file in the root directory and add your remote Postgres connection string (e.g. from Vercel Postgres or Neon):
 
-For a different machine, update the path:
-```bash
-# Create .env with your absolute path (SQLite)
-echo 'DATABASE_URL="file:./dev.db"' > .env
+```env
+DATABASE_URL="postgresql://username:password@hostname/database?sslmode=require"
 ```
 
 ### Database Setup
 
+Instantiate the Prisma client and push the schema to your remote Postgres database:
+
 ```bash
+npx prisma generate
 npx prisma db push
 ```
 
@@ -40,21 +38,17 @@ npx prisma db push
 
 ```bash
 npm run dev     # Start dev server (http://localhost:3000)
-npm test        # Run unit tests
-npm run build   # Production build
-npm start       # Start production server
+npm test        # Run mathematical unit tests
 ```
 
 ### Available Scripts
 
 | Script | Description |
 |--------|-------------|
-| `npm run dev` | Start Next.js dev server with Turbopack |
-| `npm run build` | Build for production |
-| `npm start` | Start production server |
-| `npm test` | Run vitest unit tests |
-| `npm run db:push` | Push schema to SQLite |
-| `npm run db:studio` | Open Prisma Studio |
+| `npm run dev` | Start Next.js dev server |
+| `npm run build` | Build project for production |
+| `npm start` | Start local production server |
+| `npm test` | Run vitest cryptography unit tests |
 
 ---
 
